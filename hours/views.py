@@ -7,10 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 
 
-def all_works(request):
-
-    works = Work.objects.all()
-    packages = Packages_work.objects.all()
+def task_new_add(request):
     if request.method == 'POST':
         if not request.user.is_authenticated:
             return redirect('accounts:user_login')
@@ -18,6 +15,12 @@ def all_works(request):
         if iform.is_valid():
             iform.save()
             return redirect('http://127.0.0.1:8000/')
+
+
+def all_works(request):
+
+    works = Work.objects.all()
+    packages = Packages_work.objects.all()
     if request.method == 'POST':
         bform = Packages_WorkForm(request.POST)
         if bform.is_valid():
@@ -38,4 +41,3 @@ def all_works(request):
 
     return render(request, 'hours/all_works.html',
                   {'works': works, 'iform': iform, 'packages': packages, 'bform': bform,'eform':eform})
-
