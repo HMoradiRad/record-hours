@@ -64,7 +64,7 @@
         {% for package in packages %}
             <a href="#" class="w3-bar-item w3-button" style="margin-top: 5%;border-radius: 8px;border: 2px solid gray;">{{ package.j_created_at }}</a>
         {% endfor %}
-        <form method="post">
+        <form method="post" action="{% url 'add_new_task' %}">
             {% csrf_token %}
             {% for field in bform.hidden_fields %}
                 {{ bform.as_p }}
