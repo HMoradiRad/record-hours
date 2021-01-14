@@ -10,10 +10,18 @@ class Packages_WorkForm(forms.ModelForm):
 
 
 class WorkForm(forms.ModelForm):
-    title = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control','placeholder':'کار جدید را وارد کنید',
-                                                          'dir':'rtl'}),label='')
+    title = forms.CharField(
+        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'کار جدید را وارد کنید',
+                                      'dir': 'rtl'}), label='')
 
     class Meta:
         model = Work
-        fields = ('title','end_work')
-        widgets = {'title': forms.HiddenInput(),'end_work':forms.HiddenInput()}
+        fields = ('title',)
+        widgets = {'title': forms.HiddenInput()}
+
+
+class WorkForms(forms.ModelForm):
+    class Meta:
+        model = Work
+        fields = ('end_work',)
+        widgets = {'end_work': forms.HiddenInput()}

@@ -15,9 +15,9 @@ class Packages_work(models.Model):
 
 class Work(models.Model):
     title = models.CharField(max_length=200)
-    start_work = models.DateTimeField(auto_now_add=True)
-    end_work = models.DateTimeField(default=timezone.now)
-    work_duration = models.TimeField(auto_now=True)
+    start_work = models.DateTimeField(default=timezone.now)
+    end_work = models.DateTimeField(blank=True,null=True)
+    work_duration = models.PositiveIntegerField(default=0)
     package_work = models.ForeignKey(Packages_work, on_delete=models.CASCADE,null=True)
 
     def __str__(self):

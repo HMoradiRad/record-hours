@@ -13,16 +13,33 @@
                 <th>عنوان کار</th>
             </tr>
             {% for work in works %}
+{#                {{ work }}#}
                 <tr>
                     <td>Jill</td>
-                    <td>
-                        <button class="btn btn-danger" value="">اتمام</button>
-                    </td>
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ eform.as_p }}
+
+                        <td class="endTagParent">
+
+                            <button class="btn btn-danger endTag" onclick="endTag(this)" value="">اتمام</button>
+                            <span class="endTimeSpan" style="display: none"> sdfg {{ work.j_end_work }} </span>
+                        </td>
+                    </form>
                     <td dir="rtl">{{ work.j_start_work }}</td>
                     <td>{{ work.title }}</td>
                 </tr>
             {% endfor %}
+            <script src="{% static 'hours/js/jquery-3.4.1.min.js' %}"></script>
+                <script>
+                    function endTag(tag){
+                        $(tag).remove();
+                        $(tag+'+ .endTimeSpan').show();
+                    }
+                </script>
         </table>
+
+
         <div style="width: 95%;margin-left: 3%">
             <form method="post" >
 
