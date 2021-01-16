@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+    <div style="overflow-x:auto;" >
+        <table>
+            <tr>
+                <th>مدت زمان</th>
+                <th>پایان</th>
+                <th>شروع</th>
+                <th>عنوان کار</th>
+            </tr>
+            {% for work in works %}
+
+                <tr>
+                    <td>{{ work.duration }}</td>
+                    {% if work.end_work %}
+                        <td dir="rtl">{{ work.j_end_work }}</td>
+                    {% else %}
+                          <form method="post" action="{% url 'end_task' %}">
+                        {% csrf_token %}
+
+                        <td class="endTagParent">
+                            <input type="hidden" value="{{ work.id }}" name="id">
+                            <input type="hidden" value="{{ package_id }}" name="package_id">
+                            <button class="btn btn-danger endTag" type="submit" value="">اتمام</button>
+                            <span class="endTimeSpan" style="display: none">  {{ work.j_end_work }} </span>
+                        </td>
+                    </form>
+                    {% endif %}
+                    <td dir="rtl">{{ work.j_start_work }}</td>
+                    <td>{{ work.title }}</td>
+                </tr>
+            {% endfor %}
+            <script src="{% static 'hours/js/jquery-3.4.1.min.js' %}"></script>
+                <script>
+                    function endTag(tag){
+                        $(tag).remove();
+                        $(tag+'+ .endTimeSpan').show();
+                    }
+                </script>
+        </table>
+
+
+        <div style=iform"width: 95%;margin-left: 3%">
+            <form method="post" action="{% url 'add_new_task' %}">
+
+                {% csrf_token %}
+                <input type="hidden" value="{{ package_id }}" name="package_id">
+                {{ iform.as_p }}
+            </form>
+        </div>
+    </div>
+    <script src="{% static 'hours/js/click.js' %}"></script>
+
+{% endblock%}
+
+
+
+
+
+{% block side %}
+
+
+    {% include 'hours/inc/_sidebar.html' %}
+
+
+
+
+{% endblock %}
+
+

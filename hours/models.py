@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.db import models
 from django.contrib.auth.models import User
 from extentions.utils import jalali_converter, t_jlali_converter
@@ -5,9 +6,8 @@ from django.utils import timezone
 
 
 class Packages_work(models.Model):
-
     create = models.DateTimeField(default=timezone.now)
-    user = models.ForeignKey(User,on_delete=models.CASCADE,null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
     def j_created_at(self):
         return jalali_converter(self.create)
@@ -16,9 +16,9 @@ class Packages_work(models.Model):
 class Work(models.Model):
     title = models.CharField(max_length=200)
     start_work = models.DateTimeField(default=timezone.now)
-    end_work = models.DateTimeField(blank=True,null=True)
+    end_work = models.DateTimeField(blank=True, null=True)
     work_duration = models.PositiveIntegerField(default=0)
-    package_work = models.ForeignKey(Packages_work, on_delete=models.CASCADE,null=True)
+    package_work = models.ForeignKey(Packages_work, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return self.title
@@ -28,3 +28,15 @@ class Work(models.Model):
 
     def j_end_work(self):
         return t_jlali_converter(self.end_work)
+
+    def duration(self):
+        if self.start_work and self.end_work:
+            time1 = self.start_work
+            time2 = self.end_work
+            secound = (time2 - time1).seconds
+
+            return secound
+
+
+
+

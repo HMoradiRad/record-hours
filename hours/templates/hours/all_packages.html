@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+    <div style="overflow-x:auto;" >
+        <h3 style="text-align: center">
+                   از سمت راست انتخاب کنید
+
+        </h3>
+
+
+
+    </div>
+    <script src="{% static 'hours/js/click.js' %}"></script>
+
+{% endblock%}
+
+
+
+
+
+{% block side %}
+
+    {% include 'hours/inc/_sidebar.html' %}
+
+
+
+
+
+{% endblock %}
+
+
