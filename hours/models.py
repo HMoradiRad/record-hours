@@ -3,6 +3,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from extentions.utils import jalali_converter, t_jlali_converter
 from django.utils import timezone
+from datetime import timedelta
 
 
 class Packages_work(models.Model):
@@ -33,9 +34,9 @@ class Work(models.Model):
         if self.start_work and self.end_work:
             time1 = self.start_work
             time2 = self.end_work
-            secound = (time2 - time1).seconds
-
-            return secound
+            hur = (time2.hour - time1.hour)
+            minu = (time2.minute - time1.minute)
+            return "{}:{}".format(hur,minu)
 
 
 

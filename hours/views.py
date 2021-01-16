@@ -75,3 +75,5 @@ def work(request, pk):
     return render(request, 'hours/work.html',
                   {'works': works, 'iform': iform, 'packages': packages, 'bform': bform, 'eform': eform,
                    'package_id':package_id})
+
+
