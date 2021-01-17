@@ -1,4 +1,6 @@
-from datetime import datetime
+from datetime import datetime, timedelta
+import datetime as mm
+
 from django.db import models
 from django.contrib.auth.models import User
 from extentions.utils import jalali_converter, t_jlali_converter
@@ -18,7 +20,6 @@ class Work(models.Model):
     title = models.CharField(max_length=200)
     start_work = models.DateTimeField(default=timezone.now)
     end_work = models.DateTimeField(blank=True, null=True)
-    work_duration = models.PositiveIntegerField(default=0)
     package_work = models.ForeignKey(Packages_work, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
@@ -32,12 +33,6 @@ class Work(models.Model):
 
     def duration(self):
         if self.start_work and self.end_work:
-            time1 = self.start_work
-            time2 = self.end_work
-            hur = (time2.hour - time1.hour)
-            minu = (time2.minute - time1.minute)
-            return "{}:{}".format(hur,minu)
+            output = (self.end_work - self.start_work)
 
-
-
-
+            return "{}:{}".format(output.seconds // 3600, (output.seconds // 60) % 60)
