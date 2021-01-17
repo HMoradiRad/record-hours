@@ -34,5 +34,11 @@ class Work(models.Model):
     def duration(self):
         if self.start_work and self.end_work:
             output = (self.end_work - self.start_work)
-
-            return "{}:{}".format(output.seconds // 3600, (output.seconds // 60) % 60)
+            hors = output.seconds // 3600
+            minute = (output.seconds // 60 ) % 60
+            if hors == 0:
+                return "{} دقیقه".format(minute)
+            elif minute == 0:
+                return "ساعت {}".format(hors)
+            else:
+                return "{}ساعت و {} دقیقه".format(hors, minute)
