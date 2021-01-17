@@ -35,4 +35,4 @@ def user_register(request):
 
 def user_logout(request):
     logout(request)
-    return redirect('all_works')
+    return redirect('main')
