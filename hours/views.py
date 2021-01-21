@@ -30,6 +30,7 @@ def add_new_task(request):
         raise Http404("not found")
 
 
+@login_required
 def end_task(request):
     if request.method == 'POST':
         pk = request.POST.get("id")
@@ -42,6 +43,7 @@ def end_task(request):
         raise Http404("not found")
 
 
+@login_required
 def task_new_package(request):
     if request.method == 'POST':
         pform = Packages_WorkForm(request.POST)
@@ -74,6 +76,4 @@ def work(request, pk):
 
     return render(request, 'hours/work.html',
                   {'works': works, 'iform': iform, 'packages': packages, 'bform': bform, 'eform': eform,
-                   'package_id':package_id})
-
-
+                   'package_id': package_id})

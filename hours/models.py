@@ -35,7 +35,7 @@ class Work(models.Model):
         if self.start_work and self.end_work:
             output = (self.end_work - self.start_work)
             hors = output.seconds // 3600
-            minute = (output.seconds // 60 ) % 60
+            minute = (output.seconds // 60) % 60
             if hors == 0:
                 return "{} دقیقه".format(minute)
             elif minute == 0:
